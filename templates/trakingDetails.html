@@ -1,0 +1,18 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Time</th>
+                <th>Date</th>
+                <th>Tracking Details</th>
+            </tr>
+            <tr>
+                {% for v in tr %}
+                <td>{{v.Time}}</td>
+                <td>{{v.Date}}</td>
+                <td>{{v.Details}}</td>
+                {% endfor %}
+            </tr>
+        </table>
+    </body>
+</html>

@@ -1,0 +1,17 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'categoryAction' %}">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Category Name</td>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="ADD"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

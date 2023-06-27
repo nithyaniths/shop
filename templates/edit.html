@@ -1,0 +1,68 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'editAction' %}">
+            {% csrf_token %}
+            <table>
+                {% for v in ed %}
+                 
+                 <tr><td>Name</td>
+                    <td><input type="text" name="name" value="{{v.Name}}"></td>
+                </tr>
+                <tr>
+                    <td>Gender</td>
+                    <td>
+                        {% if v.Gender == 'male' %}
+                        <input type="radio" name="gender" value="male" checked="true">Male
+                        <input type="radio" name="gender" value="female">Female
+                        <input type="radio" name="gender" value="others">Others
+                        {% elif v.Gender == 'female' %}
+                        <input type="radio" name="gender" value="male">Male
+                        <input type="radio" name="gender" value="female" checked="true">Female
+                        <input type="radio" name="gender" value="others">Others
+                        {% else %}
+                        <input type="radio" name="gender" value="male">Male
+                        <input type="radio" name="gender" value="female">Female
+                        <input type="radio" name="gender" value="others" checked="true">Others
+                        {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Age</td>
+                    <td>
+                    <input type="number" name="age" value="{{v.Age}}">
+                </td>
+                </tr>
+                <tr><td>Date of Birth</td>
+                    <td><input type="date" name="date" value="{{v.DateOfBirth}}"></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>
+                        <select name="country">
+                           <option value="{{v.id}}">{{v.Country}}</option>
+                            <option value="India">India</option>
+                            <option value="China">China</option>
+                            <option value="Japan">Japan</option>
+                            <option value="SriLanka">SriLanka</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr><td>Phone</td>
+                    <td><input type="text" name="phone" value="{{v.Phone}}"></td>
+                </tr>
+                <tr><td>Usename</td>
+                    <td><input type="text" name="username" value="{{v.Username}}"></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="password" value="{{v.Password}}"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="Update"></td>
+                </tr>
+                {% endfor %}
+            </table>
+        </form>
+    </body>
+</html>

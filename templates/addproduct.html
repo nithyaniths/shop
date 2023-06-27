@@ -1,0 +1,45 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'addproductAction' %}" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="name"></td>
+                </tr>
+                <tr>
+                    <td>Image</td>
+                    <td><input type="file" name="file"></td>
+                </tr>
+                <tr>
+                    <td>Price</td> 
+                    <td><input type="text" name="price"></td>
+                </tr>
+                <tr>
+                    <td>Stock</td>
+                    <td><input type="text" name="stock"></td>
+                </tr>
+                <tr>
+                    <td>Details</td>
+                    <td><input type="text" name="details"></td>
+                </tr>
+                
+                <tr>
+                    <td>Category</td>
+                    <td>
+                        <select  name="category">
+                            <option value="">--select--</option>
+                            {% for v in ca %}
+                            <option value="{{v.id}}">{{v.CategoryName}}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="ADD"></td>
+                </tr>
+            </table>
+        </form>
+    </body>
+</html>

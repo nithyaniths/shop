@@ -1,0 +1,97 @@
+<html>
+    <body>
+        <script type="text/javascript">
+            function validation(){
+                var alpha=/^[a-zA-Z]+$/;
+                var num=/^[0-9]+$/;
+
+                var name=document.getElementById('name');
+                var address=document.getElementById('address');
+                var phone=document.getElementById('phone');
+
+                if(name.value.length == 0){
+                    alert('enter a name');
+                    return false;
+                }
+                else if(!name.value.match(alpha)){
+                    alert('enter a valid name');
+                    return false;
+                }
+                else if(address.value.length == 0){
+                    alert('enter address');
+                    return false;
+                }
+                else if(phone.value.length == 0){
+                    alert('enter phone number');
+                    return false;
+                }
+                else if(!phone.value.match(num)){
+                    alert('enter valid phone number');
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        </script>
+        <script src="/static/jquery-1.8.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $(".chkProduct").change(function(){
+                    var t=$("#total").val();
+                    var p=$("#"+$(this).val()).val();
+                    $('#total').val(parseInt(t)+parseInt(p));
+                })
+            })
+        </script>
+        
+        <form method="post" action="{% url 'cartviewAction' %}">
+            {% csrf_token %}
+        <table>           
+            <tr>
+                <th>Product's Name</th>
+                <th>Image</th>
+                <th>Total Price</th>
+                <th>Quantity</th>
+             </tr>
+             {% for v in cart %}
+            <tr>
+                <td>{{v.ProductId.Name}}</td>
+                <td><img src="{{v.ProductId.File.url}}" alt="no pic"></td>
+                <td>{{v.Total}}</td>
+                <td>{{v.Quantity}}</td>
+                <td><input type="checkbox" name="checkbox" value="{{v.id}}" class="chkProduct"></td>
+                <input type="hidden" name="" id="{{v.id}}" value="{{v.Total}}">
+            </tr>
+            {% endfor %}
+            <tr>
+                <th>Grand Total</th>
+                <td><input type="text" name="total" id="total" value="0" readonly="true"></td>
+            </tr>
+            <tr>
+                <th>Customer Name</th>
+                <td><input type="text" name="name" id="name"></td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td><textarea name="address" cols="10" rows="3" id="address"></textarea></td>
+            </tr>
+            <tr>
+                <th>Phone Number</th>
+                <td><input type="text" name="phone" id="phone"></td>
+            </tr>
+            <tr>
+            <td></td>
+                <td><input type="submit" value="MAKE AN ORDER" onclick="return validation()"></td>
+            </tr>           
+        </table>
+    </form>
+    </body>
+    {% if messages %}
+        {% for msg in messages %}
+        <script>
+            alert('{{msg}}')
+        </script>
+        {% endfor %}
+    {% endif %}
+</html>

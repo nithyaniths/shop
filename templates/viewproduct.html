@@ -1,0 +1,36 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'searchAction' %}">
+            {% csrf_token %}
+        <div>
+            <input type="text" name="search">
+            <input type="submit" value="Search">
+        </div>
+        <div style="display: flex; flex-wrap: wrap;">
+            {% for v in vi %}
+            <div style="padding: 5px;width: 32%">
+                <div style="border: 1px solid silver;padding: 15px;">
+                <img src="{{v.File.url}}" height="200px" width="100%" alt="no pic">
+                <span style="font-size: x-large; font-weight: bold;">{{v.Name}}</span>
+                <span style="text-align: right;display: block;">{{v.CategoryId.CategoryName}}</span><br>
+                <span><i>{{v.Details}}</i></span><br>
+                <div>
+                    <span style="width: 47%;display: inline-block;">{{v.Stock}}</span>
+                <span style="font-size: xx-large;font-weight: bold; color: red;text-align: right;width: 50%;display: inline-block;">Rs. {{v.Price}}</span>
+                </div>
+                    <a href="{% url 'addcart' v.id %}" style="background-color: rgb(78, 2, 2)
+                    ;color: white;padding: 10px; width: auto; display: block;text-align: center;margin: auto;">Add To Cart</a>
+            </div>
+        </div>
+            {% endfor %}
+        </div>    
+        </form> 
+    </body>
+    {% if messages %}
+        {% for msg in messages %}
+        <script>
+            alert('{{msg}}')
+        </script>
+        {% endfor %}
+    {% endif %}
+</html>

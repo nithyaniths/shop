@@ -1,0 +1,47 @@
+<html>
+    <body>    
+        <form method="post" action="{% url 'edProductAction' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <table>
+            {% for v in ed %}
+            <td><input type="hidden" name="id" value="{{v.id}}"></td>           
+            <tr>
+               <td>Name</td>
+               <td><input type="text" name="name" value="{{v.Name}}"></td>
+            </tr>
+            <tr>
+                <td>Image</td>
+                <td><img src="{{v.File.url}}" height="100px" width="100px" alt="no pic">
+                <input type="file" name="file"></td>
+            </tr>
+            <tr>
+                <td>Price</td>
+                <td><input type="text" name="price" value="{{v.Price}}"></td>
+            </tr>
+            <tr>
+                <td>Stock</td>
+                <td><input type="text" name="stock" value="{{v.Stock}}"></td>
+            </tr>
+            <tr>
+                <td>Details</td>
+                <td><input type="text" name="details" value="{{v.Details}}"></td>
+            </tr>
+            <tr>
+                <td>Category</td>
+                <td><select name="category">
+                    <option value="{{v.id}}">{{v.CategoryId.CategoryName}}</option>
+                    {% for c in ca %}
+                    <option value="{{c.id}}">{{c.CategoryName}}</option>
+                    {% endfor %}                    
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Update"></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    </body>
+</html>

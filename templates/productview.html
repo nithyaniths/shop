@@ -1,0 +1,38 @@
+<html>
+    <body>
+       
+        {% for v in vi %}
+        <div style="border: 2px solid silver;">
+          
+        <div>
+          <label style="padding-left: 30px;">Name</label>
+          <span style="padding-left: 60px;">{{v.Name}}</span>
+        </div>
+        <div>
+          <label style="padding-left: 30px;">Image</label>
+          <img src="{{v.File.url}}" style="padding-left: 60px;" height="100px" width="100px">
+        </div>
+        <div>
+          <label style="padding-left: 30px;">Price</label>
+          <span style="padding-left: 60px;">{{v.Price}}</span>
+        </div>
+        <div>
+          <label style="padding-left: 30px;">Stock</label>
+          <span style="padding-left: 60px;">{{v.Stock}}</span>
+        </div>
+        <div>
+          <label style="padding-left: 30px;">Details</label>
+          <span style="padding-left: 50px;">{{v.Details}}</span>
+        </div>
+        <div>
+          <label style="padding-left: 30px;">Category</label>
+          <span style="padding-left: 30px;">{{v.CategoryId.CategoryName}}</span>
+        </div>
+        <div style="display: flex;">
+          <a href="{% url 'editproduct' v.id %}">Edit</a>
+          <a href="{% url 'deleteproduct' v.id %}">Delete</a>
+        </div>
+      </div>
+        {% endfor %}   
+    </body>
+</html>

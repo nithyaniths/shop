@@ -1,0 +1,133 @@
+<html>
+    <body>
+        <script type="text/javascript">
+            function validation(){
+                var alpha=/^[a-zA-Z]+$/;
+                var num=/^[0-9]+$/;
+                var email=/^[\w\-\.\+]+@[a-zA-Z0-9\.\-]+\.[a-zA-Z0-9]{2,4}$/;
+
+                var name=document.getElementById('name');
+                var gender=document.myform.gender;
+                var age=document.getElementById('age')
+                var date=document.getElementById('date');
+                var country=document.getElementById('country');
+                var phone=document.getElementById('phone');
+                var username=document.getElementById('username');
+                var password=document.getElementById('password');
+
+                if(name.value.length==0)
+                {
+                    alert('enter name')
+                    return false;
+                }
+                else if(!name.value.match(alpha))
+                {
+                    alert('enter valid name')
+                    name.focus();
+                    return false;
+                }
+                else if(gender[0].checked == false && gender[1].checked == false && gender[2].checked == false)
+                {
+                    alert('enter gender')
+                    return false;
+                }
+                else if(age.value.length==0){
+                    alert('enter your age')
+                    return false;
+                }
+                else if(date.value.length==0)
+                {
+                    alert('enter date')
+                    return false;
+                }
+                else if(country.value.length==0){
+                    alert('choose a country')
+                    return false;
+                }
+                else if(phone.value.length==0){
+                    alert('enter phone')
+                    return false;
+                }
+                else if(!phone.value.match(num)){
+                    alert('enter valid phone number')
+                    phone.focus();
+                    return false;
+                }
+                else if(username.value.length==0){
+                    alert('enter an username')
+                    return false;
+                }
+                else if(!username.value.match(email)){
+                    alert('enter a valid email')
+                    username.focus();
+                    return false
+                }
+                else if(password.value.length==0){
+                    alert('enter password')
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        </script>
+        <form method="post" action="{% url 'registerAction' %}" name="myform">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <td>Name</td>
+                <td><input type="text" name="name" id="name"></td>
+            </tr>
+            <tr>
+                <td>Gender</td>
+                <td><input type="radio" name="gender" value="male" id="gender">Male
+                <input type="radio" name="gender" value="female">Female
+            <input type="radio" name="gender" value="others">Others</td>
+            </tr>
+            <tr>
+                <td>Age</td>
+                <td><input type="number" name="age" id="age"></td>
+            </tr>
+            <tr>
+                <td>Date Of Birth</td>
+                <td><input type="date" name="date" id="date"></td>
+            </tr>
+            <tr>
+                <td>Country</td>
+                <td>
+                    <select name="country" id="country">
+                        <option value="">--select--</option>
+                        <option value="India">India</option>
+                        <option value="China">China</option>
+                        <option value="Japan">Japan</option>
+                        <option value="SriLanka">SriLanka</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Phone</td>
+                <td><input type="text" name="phone" id="phone"></td>
+            </tr>
+            <tr>
+                <td>Username</td>
+                <td><input type="text" name="username" id="username"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password" id="password"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Register" onclick="return validation()"></td>
+            </tr>
+        </table>
+    </form>
+    </body>
+    {% if messages %}
+    {% for msg in messages %}
+        <script>
+            alert('{{msg}}')
+        </script>
+    {% endfor %}
+    {% endif %}
+</html>

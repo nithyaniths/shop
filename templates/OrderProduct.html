@@ -1,0 +1,47 @@
+<html>
+    <body>       
+{% for p in o %}
+    <div style="display: flex;flex-wrap:wrap ;">
+       <div>
+            <div style="padding-top: 10px;">
+            <span>Order Date </span>
+            <span style="color: brown;padding-top: 20px;padding-left: 35px;">{{p.OrderDate}}</span>
+            </div>
+            <div style="padding-top: 10px;">
+            <span>Order Time</span>
+            <span style="color: brown;padding-top: 20px;padding-left: 35px;">{{p.OrderTime}}</span>
+            </div>  
+      </div>
+      {% for v in or %}  
+        <div style="padding-left: 100px;display: flex;flex-wrap:wrap">              
+              <div>           
+                <img src="{{v.ProductId.File.url}}">
+                <div style="padding-top: 5px;">
+                <span> Name</span>
+                <span style="color: brown;padding-top: 20px;padding-left: 90px;">{{v.ProductId.Name}}</span>
+                </div>
+                <div style="padding-top: 5px;">
+                <span> Quantity</span>
+                    <span style="color: brown;padding-top: 20px;padding-left: 75px;">{{v.Quantity}}</span>
+                </div>
+                <div style="padding-top: 5px;">
+                    <span> Total</span>
+                        <span style="color: brown;padding-top: 20px;padding-left: 98px;">{{v.Total}}</span>
+                    </div>
+                    <div style="padding-top: 5px;">
+                        <span> Remaining Stock</span>
+                            <span style="color: brown;padding-top: 20px;padding-left: 20px;">{{v.ProductId.Stock}}</span>
+                       </div>                
+              </div>  
+            </div>  
+            {% endfor %}
+        </div>
+        {% if p.Status == "Approved" %}
+        <a href="{% url 'viewtracking' p.id %}" style="display: block;background-color: brown;color:white;margin-top:20px;padding: 10px;text-align: center;">View Tracking Details</a>
+        {% elif p.Status == "Pending" %}
+        <a href="{% url 'cancelOrder' p.id %}" style="display: block;background-color: brown;color:white;margin-top:20px;padding: 10px;text-align: center;">Cancel</a>
+        {% endif %}
+    {% endfor %}  
+    </body>
+</html>
+        

@@ -1,0 +1,27 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'searchCategoryAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <td>Category</td>
+                <td>
+                <select name="Category">
+                    <option value="">--select--</option>
+                   {% for v in ca %}
+                   <option value="{{v.id}}">{{v.CategoryName}}</option>
+                   {% endfor %}
+                </select>
+            </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="search" name="search">
+                    <input type="submit" value="Search">
+                </td>
+            </tr>
+        </table>
+    </form>
+    </body>
+</html>

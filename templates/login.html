@@ -1,0 +1,32 @@
+<html>
+    <body>
+        <form method="post" action="{% url 'loginAction' %}">
+            {% csrf_token %}
+        <table>
+            <tr>
+                <td>UserName</td>
+                <td><input type="text" name="username"></td>
+            </tr>
+            <tr>
+                <td>Password</td>
+                <td><input type="password" name="password"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="submit" value="Login"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <a href="{% url 'forgotpassword' %}">Forgot Password</a>
+            </tr>
+        </table>
+    </form>
+    </body>
+    {% if messages %}
+      {% for msg in messages %}
+         <script>
+            alert('{{msg}}')
+         </script>
+      {% endfor %}
+    {% endif %}
+</html>

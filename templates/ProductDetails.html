@@ -1,0 +1,67 @@
+<html>
+    <body>       
+{% for p in or %}
+    <div style="display: flex;flex-wrap:wrap ;">
+       <div>
+            <div style="padding-top: 10px;">
+            <span>Order Date </span>
+            <span style="color: brown;padding-top: 20px;padding-left: 35px;">{{p.OrderDate}}</span>
+            </div>
+            <div style="padding-top: 10px;">
+            <span>Order Time</span>
+            <span style="color: brown;padding-top: 20px;padding-left: 35px;">{{p.OrderTime}}</span>
+            </div>  
+            <div style="padding-top: 10px;">
+                <span>Status</span>
+                <span style="color: brown;padding-top: 20px;padding-left: 70px;">{{p.Status}}</span>
+                </div>
+      </div>
+      {% for v in o %}  
+        <div style="padding-left: 100px;display: flex;flex-wrap:wrap">              
+              <div>           
+                <img src="{{v.ProductId.File.url}}">
+                <div style="padding-top: 5px;">
+                <span> Name</span>
+                <span style="color: brown;padding-top: 20px;padding-left: 90px;">{{v.ProductId.Name}}</span>
+                </div>
+                <div style="padding-top: 5px;">
+                <span> Quantity</span>
+                    <span style="color: brown;padding-top: 20px;padding-left: 75px;">{{v.Quantity}}</span>
+                </div>
+                <div style="padding-top: 5px;">
+                    <span> Total</span>
+                        <span style="color: brown;padding-top: 20px;padding-left: 98px;">{{v.Total}}</span>
+                    </div>
+                    <div style="padding-top: 5px;">
+                        <span> Remaining Stock</span>
+                            <span style="color: brown;padding-top: 20px;padding-left: 20px;">{{v.ProductId.Stock}}</span>
+                       </div>                
+              </div>  
+            </div>  
+            {% endfor %}
+        </div>  
+        <div style="display: flex;justify-content:center;">
+            {% for q in or %}        
+        {% if q.Status == "Pending" %}
+        <a href="{% url 'OrderApprove' q.id %}" style="display: block;background-color: brown;color:white;margin-top:20px;padding: 10px;text-align: center;">Approve</a>
+        {% endif %}
+        {% if q.Status == "Pending" %}
+        <a href="{% url 'OrderReject' q.id %}" style="display: block;background-color: brown;color:white;margin-top:20px;padding: 10px;text-align: center;">Reject</a>
+        {% endif %}
+
+        {% if q.Status == "Approved" %}
+        <a href="{% url 'trackingdetails' q.id %}" style="display: block;background-color: brown;color:white;margin-top:20px;padding: 10px;text-align: center;">Add Tracking Details</a>
+        {% endif %}
+
+        {% if q.Status == "Rejected" %}
+        <a href="{% url 'confirmCancel' q.id %}" style="display: block;background-color: brown;color: white;margin-top:20px ;padding:10px ;text-align: center;">Confirm Cancel</a>
+        {% endif %}
+
+        {% if q.Status == "Cancelled"%}
+        <label style="color: red;background-color: gainsboro;font-size: xx-large;">Order is Rejected</label>
+        {% endif %}
+    {% endfor %}
+    {% endfor %}
+</div>
+    </body>
+</html>

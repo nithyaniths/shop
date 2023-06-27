@@ -1,0 +1,29 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+                
+            </tr>
+            {% for v in or %}
+            <tr>
+                
+                <td>{{v.Name}}</td>
+                <td>{{v.Address}}</td>
+                <td>{{v.Phone}}</td>
+                <td><a href="{% url 'orderviewAction' v.id %}">Details</a></td>
+               
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+    {% if messages %}
+     {% for msg in messages %}
+       <script>
+        alert('{{msg}}')
+       </script>
+       {% endfor %}
+       {% endif %}
+</html>

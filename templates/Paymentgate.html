@@ -1,0 +1,81 @@
+<html>
+    <body>
+        <script type="text/javascript">
+            function validation(){
+                debugger;
+                var alpha=/^[a-zA-Z\s]+$/;
+                var num=/^[0-9]{16}$/;
+                var ccc=/^[0-9]{3}$/;
+                var dd=/^[0-9]{4}$/;
+
+                var cardname=document.getElementById('Card_name');
+                var cardnumber=document.getElementById('CardNumber');
+                var Exp_Date=document.getElementById('Exp_Date');
+                var cvv=document.getElementById('Cvv');
+                
+                if(cardname.value.length == 0){
+                    alert('enter a card number');
+                    return false;
+                }
+                else if(!cardname.value.match(alpha)){
+                    alert('enter a valid card name');
+                    return false;
+                }
+                else if(cardnumber.value.length == 0){
+                    alert('enter card number');
+                    return false;
+                }
+                else if(!cardnumber.value.match(num)){
+                    alert('invalid card number');
+                    return false;
+                }
+                else if(Exp_Date.value.length == 0){
+                    alert('enter a date');
+                    return false;
+                }
+                else if(cvv.value.length == 0){
+                    alert('enter a cvv');
+                    return false;
+                }
+                else if(!cvv.value.match(ccc)){
+                    alert('enter a valid cvv');
+                    return false;
+                }
+                else{
+                    return true;
+                }
+            }
+        </script>
+        <form method="post" action="{% url 'paymentAction' %}">
+            {% csrf_token %}
+        <table> 
+            <tr>
+            {% for v in order %}
+            <td><input type="hidden" value="{{v.OrderId_id}}" name="id"></td>
+                <td><input type="hidden" value="{{v.OrderId.Grand_Total}}" name="Total" id="Total"></td>
+                {% endfor %}       
+                <tr>
+                    <td><label>Name on Card</label></td>
+                    <td><input type="text" id="Card_name" name="Card_name" placeholder="Eg:FirstName   LastName"></td>
+                    <td><label>Credit CardNumber</label></td>
+                    <td><input type="text" id="CardNumber" name="CardNumber" placeholder="Eg 1111-2222-3333-4444"></td>
+                </tr>
+                <tr>
+                    <td><label>Exp Date</label></td>
+                    <td><input type="text" id="Exp_Date" name="Exp_Date" placeholder="Eg MM/YY"></td>
+                </tr>
+                <tr>
+                    <td><label>Cvv</label></td>
+                    <td><input type="text" id="Cvv" name="Cvv" placeholder="Eg 123"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    {% for v in order %}
+                    <td><input type="submit" onclick="return validation()" value="Pay Now {{v.OrderId.Grand_Total}}"></td>
+                    {% endfor %}
+                </tr>
+        </tr>
+    </table>
+</form>
+    </body>
+</html>

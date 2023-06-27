@@ -1,0 +1,40 @@
+<html>
+    <body>
+        <table>
+            {% for v in us %}
+            <tr>
+                <th>Name</th>
+                <td>{{v.Name}}</td>
+                </tr>
+                <tr>
+                <th>Gender</th>
+                <td>{{v.Gender}}</td>
+                </tr>
+                <tr>
+                <th>Date Of Birth</th>
+                <td>{{v.DateOfBirth}}</td>
+                </tr>
+                <tr>
+                <th>Country</th>
+                <td>{{v.Country}}</td>
+                </tr>
+                <tr>
+                <th>Phone</th>
+                <td>{{v.Phone}}</td>
+                </tr>
+                <tr>
+                <th>Image</th>
+                <td><img src="{{v.File.url}}" height="100px" width="100px" alt="no pic"></td>
+                </tr>
+                <tr>
+                <th>Usename</th>
+                <td>{{v.Username}}</td>              
+            </tr>
+            <tr>               
+                <td><a href="{% url 'approved' v.id %}">Approved</a></td>
+                <td><a href="{% url 'reject' v.id %}">Rejected</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>

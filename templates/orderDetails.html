@@ -1,0 +1,20 @@
+<html>
+    <body>
+        <table>
+            <tr>
+                <th>Customer's Name</th>
+                <th>Address</th>
+                <th>Phone</th>
+            </tr>
+            {% for v in or %}
+            <tr>
+                <td>{{v.Name}}</td>
+                <td>{{v.Address}}</td>
+                <td>{{v.Phone}}</td>
+                <td></td>
+                <td><a href="{% url 'orderDetailsAction' v.id %}">Details</a></td>       
+            </tr>
+            {% endfor %}
+        </table>
+    </body>
+</html>
